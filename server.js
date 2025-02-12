@@ -1,6 +1,7 @@
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
+require("dotenv").config(); // Загружаем переменные окружения
 
 const app = express();
 app.use(cors());
@@ -9,8 +10,8 @@ app.get("/twitch", async (req, res) => {
     try {
         const response = await fetch("https://api.twitch.tv/helix/streams?game_id=509658&language=ru", {
             headers: {
-                "Client-ID": "b8gm3ocj4zuniuakjlbb3yhje7v98q",
-                "Authorization": "Bearer hqdqjbl7ongdzbylz33zo2zx5np99r"
+                "Client-ID": process.env.TWITCH_CLIENT_ID,
+                "Authorization": `Bearer ${process.env.TWITCH_ACCESS_TOKEN}`
             }
         });
         const data = await response.json();
