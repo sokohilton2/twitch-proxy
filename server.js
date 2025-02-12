@@ -1,10 +1,14 @@
 const express = require("express");
 const cors = require("cors");
 const fetch = require("node-fetch");
-require("dotenv").config(); // Загружаем переменные окружения
+require("dotenv").config();
 
 const app = express();
 app.use(cors());
+
+app.get("/", (req, res) => {
+    res.send("Twitch Proxy is running!");
+});
 
 app.get("/twitch", async (req, res) => {
     try {
@@ -22,4 +26,4 @@ app.get("/twitch", async (req, res) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`✅ Proxy работает на порту ${PORT}`));
+app.listen(PORT, () => console.log(`Proxy работает на порту ${PORT}`));
